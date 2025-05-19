@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "d03f048a-dfdc-4f5b-b3af-81dd6cafb678",
+		"name": "Connect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Server info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Installed connectors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connector-plugins",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connector-plugins"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create/update connector",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"connector_class\": \"io.confluent.connect.jdbc.JDBCSourceConnector\",\n  \"connection.url\": \"jdbc:mysql://localhost:3306/demo\",\n  \"table.whitelist\": \"sales, orders, customers\",\n  \"transforms\": \"addDateToTopic, labelColumn\",\n  \"transforms.addDateToTopic.type\": \"org.apache.kafka.connect.transforms.TimeStampRouter\",\n  \"transforms.addDateToTopic.topic.format\": \"${topic}-${timestamp}\",\n  \"transforms.addDateToTopic.timestamp.format\": \"YYYYMM\",\n  \"transforms.labelColumn.type\": \"org.apache.kafka.connect.transforms.ReplaceField$Value\",\n  \"transforms.labelColumn.renames\": \"delivery_address:shipping_address\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active connectors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors?expand=info&expand=status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "info"
+						},
+						{
+							"key": "expand",
+							"value": "status"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active connector status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete connector",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pause connector",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/pause",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"pause"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resume connector",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/resume",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"resume"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restart connector",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/restart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"restart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connector tasks info",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connector topics info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/connectors/connector-name/topics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"connector-name",
+						"topics"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

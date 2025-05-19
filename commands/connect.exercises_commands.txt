@@ -1,0 +1,17 @@
+Below are the commands for the kafka connector exercises (slides 63-66).
+
+For more info on this connector: https://github.com/confluentinc/kafka-connect-datagen/blob/master/README.md
+
+---------------------
+--- Datagen ---
+---------------------
+
+cd confluent-7.1.0/bin
+./kafka-console-consumer --topic credit_cards --bootstrap-server localhost:9092 --from-beginning
+
+---------------------
+--- MySQL -----
+---------------------
+
+cd confluent-7.1.0/bin
+./kafka-console-consumer --topic db.test.gifts --bootstrap-server localhost:9092 --from-beginning
