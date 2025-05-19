@@ -1,8 +1,10 @@
 {
 	"info": {
-		"_postman_id": "d03f048a-dfdc-4f5b-b3af-81dd6cafb678",
+		"_postman_id": "19ff3642-79a3-4fbe-bfc0-49f55a2cd869",
 		"name": "Connect",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28254432",
+		"_collection_link": "https://grey-meteor-879684.postman.co/workspace/Kafka~9f78d157-2072-4f9a-91c5-d5af9c24a8e9/collection/28254432-19ff3642-79a3-4fbe-bfc0-49f55a2cd869?action=share&source=collection_link&creator=28254432"
 	},
 	"item": [
 		{
@@ -188,10 +190,10 @@
 		{
 			"name": "Restart connector",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/connectors/connector-name/restart",
+					"raw": "http://localhost:8083/connectors/Csv-connector/restart",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -199,7 +201,7 @@
 					"port": "8083",
 					"path": [
 						"connectors",
-						"connector-name",
+						"Csv-connector",
 						"restart"
 					]
 				}
@@ -209,10 +211,10 @@
 		{
 			"name": "Connector tasks info",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/connectors/connector-name/tasks",
+					"raw": "http://localhost:8083/connectors/Csv-connector/tasks",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -220,7 +222,7 @@
 					"port": "8083",
 					"path": [
 						"connectors",
-						"connector-name",
+						"Csv-connector",
 						"tasks"
 					]
 				}
