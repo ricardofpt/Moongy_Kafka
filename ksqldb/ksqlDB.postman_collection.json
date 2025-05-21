@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "30cc37f5-db93-4fca-ab09-28d31ef83c45",
+		"name": "ksqlDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Show streams",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ksql\": \"show streams;\",\n  \"streamProperties\":{}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8088/ksql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"ksql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Show tables",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ksql\": \"show tables;\",\n  \"streamProperties\":{}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8088/ksql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"ksql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Insert data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ksql\": \"INSERT INTO MOVEMENTS VALUES('Joseph', 'Madrid');\",\n  \"streamProperties\":{}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8088/ksql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"ksql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Select data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ksql\": \"SELECT * FROM PERSON_STATS WHERE person ='Joseph';\",\n  \"streamProperties\":{}    \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8088/query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"query"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
