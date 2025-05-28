@@ -1,0 +1,9 @@
+com/clevernet/avro/generic/GenericRecordExamples.class
+com/example/Customer.class
+com/example/CustomerV1$Builder.class
+com/example/CustomerV1.class
+com/clevernet/avro/specific/SpecificRecordExamples.class
+com/example/Customer$Builder.class
+com/example/CustomerV2$Builder.class
+com/example/CustomerV2.class
+com/clevernet/avro/evolution/SchemaEvolutionExamples.class
