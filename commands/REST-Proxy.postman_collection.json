@@ -1,0 +1,892 @@
+{
+	"info": {
+		"_postman_id": "8f41a056-68b6-49c2-ba2d-8e49d6d52286",
+		"name": "REST Proxy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Topics",
+			"item": [
+				{
+					"name": "List topics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/topics",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"topics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Topic info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/topics/connect-configs",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"topics",
+								"connect-configs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producers",
+			"item": [
+				{
+					"name": "Produce binary",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.kafka.v2+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.kafka.binary.v2+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"records\": [\n        {\n            \"key\": \"Y2hhdmU=\",\n            \"value\": \"aGVsbG8gd29ybGQh\"\n        },\n        {\n            \"value\": \"I3JhbmRvbV9jaGFyYWN0ZXJzXCE=\",\n            \"partition\": 0\n        },\n        {\n            \"value\": \"aSBoYXZlIG5vIGtleSBvciBwYXJ0aXRpb24u\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/topics/rest-binary",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"topics",
+								"rest-binary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produce JSON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.kafka.v2+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.kafka.json.v2+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"records\": [\n        {\n            \"key\": \"somekey\",\n            \"value\": {\"foo\": \"bar\"}\n        },\n        {\n            \"value\": {\"bar\": \"foo\"},\n            \"partition\": 0\n        },\n        {\n            \"value\": 50.5\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/topics/rest-json",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"topics",
+								"rest-json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produce AVRO",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.kafka.v2+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.kafka.avro.v2+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value_schema\": \"{\\\"type\\\": \\\"record\\\", \\\"name\\\": \\\"User\\\", \\\"fields\\\": [{\\\"name\\\": \\\"name\\\", \\\"type\\\": \\\"string\\\"}, {\\\"name\\\" : \\\"age\\\", \\\"type\\\": [\\\"null\\\",\\\"int\\\"]}]}\",\n    \"records\": [\n        {\n            \"value\": {\"name\": \"testUser\", \"age\": null }\n        },\n        {\n            \"value\": {\"name\": \"testUser\", \"age\": {\"int\": 25} \n        },\n        \"partition\": 0\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/topics/rest-avro",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"topics",
+								"rest-avro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produce AVRO with id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.kafka.v2+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.kafka.avro.v2+json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value_schema_id\": 1,\n    \"records\": [\n        {\n            \"value\": {\"name\": \"testUser_2\", \"age\": null }\n        },\n        {\n            \"value\": {\"name\": \"testUser_2\", \"age\": {\"int\": 25} \n        },\n        \"partition\": 0\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/topics/rest-avro",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"topics",
+								"rest-avro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consumers",
+			"item": [
+				{
+					"name": "Binary",
+					"item": [
+						{
+							"name": "Consume",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.binary.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/my-consumer-group/instances/my_consumer_binary/records?timeout=3000&max_bytes=300000",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"my-consumer-group",
+										"instances",
+										"my_consumer_binary",
+										"records"
+									],
+									"query": [
+										{
+											"key": "timeout",
+											"value": "3000"
+										},
+										{
+											"key": "max_bytes",
+											"value": "300000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create consumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.binary.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"my_consumer_binary\",\n    \"format\": \"binary\",\n    \"auto.offset.reset\": \"earliest\",\n    \"auto.commit.enable\": \"false\"        \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/my-consumer-group",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"my-consumer-group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscribe consumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.binary.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"topics\": [\n        \"rest-binary\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/my-consumer-group/instances/my_consumer_binary/subscription",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"my-consumer-group",
+										"instances",
+										"my_consumer_binary",
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete consumer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.binary.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/my-consumer-group/instances/my_consumer_binary",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"my-consumer-group",
+										"instances",
+										"my_consumer_binary"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Commit Offsets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.binary.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offsets\": [\n        {\n            \"topic\": \"rest-binary\",\n            \"partition\": 0,\n            \"offset\": 2\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/my-consumer-group/instances/my_consumer_binary/offsets",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"my-consumer-group",
+										"instances",
+										"my_consumer_binary",
+										"offsets"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "JSON",
+					"item": [
+						{
+							"name": "Consume",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_json/records?timeout=3000&max_bytes=300000",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_json",
+										"records"
+									],
+									"query": [
+										{
+											"key": "timeout",
+											"value": "3000"
+										},
+										{
+											"key": "max_bytes",
+											"value": "300000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm subscription",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_json/subscription",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_json",
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create consumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"my_consumer_json\",\n    \"format\": \"json\",\n    \"auto.offset.reset\": \"earliest\",\n    \"auto.commit.enable\": \"false\"        \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscribe consumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"topics\": [\n        \"rest-json\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_json/subscription",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_json",
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete consumer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_json",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_json"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Commit Offsets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.json.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offsets\": [\n        {\n            \"topic\": \"rest-json\",\n            \"partition\": 0,\n            \"offset\": 2\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_json/offsets",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_json",
+										"offsets"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AVRO",
+					"item": [
+						{
+							"name": "Consume",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_avro/records?timeout=3000&max_bytes=300000",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_avro",
+										"records"
+									],
+									"query": [
+										{
+											"key": "timeout",
+											"value": "3000"
+										},
+										{
+											"key": "max_bytes",
+											"value": "300000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm subscription",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_avro/subscription",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_avro",
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create consumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"my_consumer_avro\",\n    \"format\": \"avro\",\n    \"auto.offset.reset\": \"earliest\",\n    \"auto.commit.enable\": \"false\"        \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Subscribe consumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"topics\": [\n        \"rest-avro\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_avro/subscription",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_avro",
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete consumer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_avro",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_avro"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Commit Offsets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.kafka.v2+json",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.kafka.avro.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offsets\": [\n        {\n            \"topic\": \"rest-avro\",\n            \"partition\": 0,\n            \"offset\": 3\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/consumers/other-consumer-group/instances/my_consumer_avro/offsets",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"consumers",
+										"other-consumer-group",
+										"instances",
+										"my_consumer_avro",
+										"offsets"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
